@@ -1,84 +1,41 @@
-# ==========================================================================
-# SENTRA KERUPUK IKAN BESUKI
-# ==========================================================================
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# --- Dependensi -----------------------------------------------------------
-# Berat, dan bisa dibuat ulang kapan saja dengan `npm install`.
-# package-lock.json TIDAK diabaikan: berkas itu justru harus ikut di-commit
-# agar versi pustaka sama persis di komputer siapa pun yang melanjutkan.
-node_modules/
-.npm/
-*.tgz
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
+# testing
+/coverage
 
-# --- Log dan berkas sementara ---------------------------------------------
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-*.log
-.cache/
-.temp/
-.tmp/
+.pnpm-debug.log*
 
+# env files (can opt-in for committing if needed)
+.env*
 
-# --- Berkas bawaan sistem operasi -----------------------------------------
-# Muncul sendiri di Windows dan macOS, tidak ada hubungannya dengan project.
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
+# vercel
+.vercel
 
-
-# --- Berkas editor --------------------------------------------------------
-.vscode/*
-!.vscode/extensions.json
-.idea/
-*.swp
-*.swo
-*~
-
-
-# --- Rahasia --------------------------------------------------------------
-# Belum dipakai sekarang, tapi dicantumkan agar tidak pernah ikut ter-push
-# bila suatu saat ditambahkan.
-.env
-.env.*
-!.env.example
-
-
-# --- Hasil build -----------------------------------------------------------
-#
-# CATATAN PENTING, JANGAN DIHAPUS.
-#
-# Hasil build SENGAJA TIDAK diabaikan, jadi berkas berikut tetap ikut
-# di-commit:
-#
-#   *.html          halaman utama
-#   produsen/       halaman profil tiap produsen
-#   css/*.css       stylesheet hasil kompilasi
-#   lib/            pustaka hasil salinan dari node_modules
-#   sitemap.xml
-#
-# Alasannya: GitHub Pages menyajikan berkas langsung dari repository, tanpa
-# menjalankan `npm run build`. Kalau berkas di atas diabaikan, website akan
-# kosong saat dibuka.
-#
-# Yang perlu diingat: jalankan `npm run build` SEBELUM commit, setiap kali
-# mengubah data/produsen.json, src/pages/, atau src/scss/.
-#
-# Kalau nanti pindah ke Netlify atau Vercel yang menjalankan build sendiri,
-# barulah hasil build boleh diabaikan. Caranya, hapus tanda pagar pada baris
-# di bawah ini:
-#
-# /*.html
-# /produsen/
-# /css/icons.css
-# /css/style.css
-# /css/tailwind.css
-# /lib/
-# /sitemap.xml
+# typescript
+*.tsbuildinfo
+next-env.d.ts

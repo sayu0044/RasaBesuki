@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+/*
+  Sentra Kerupuk Ikan Besuki - design tokens.
+
+  Tema TERANG SAJA. Tidak ada blok prefers-color-scheme di berkas ini dan
+  tidak boleh ditambahkan: pembaca utama situs ini berusia lebih tua dan
+  satu tema yang konsisten lebih mudah dibaca daripada dua tema yang
+  setengah matang.
+
+  Warna jangkar (--color-laut-950) diambil dari situs statis sebelumnya
+  supaya identitas visual yang sudah dikenal tidak hilang begitu saja.
+*/
+
+@theme {
+  /* Jangkar gelap, warna teal-tinta dari situs lama */
+  --color-laut-950: #071a21;
+  --color-laut-900: #0d2830;
+  --color-laut-800: #163b45;
+
+  /* Kertas dingin, sengaja bukan krem hangat */
+  --color-kertas: #f7f6f3;
+  --color-kertas-tenggelam: #eeece7;
+  --color-permukaan: #ffffff;
+
+  /* Teks */
+  --color-tinta: #10262e;
+  --color-teks: #40525a;
+  --color-teks-samar: #5f7178;
+
+  /* Garis */
+  --color-garis: #dfe3e2;
+  --color-garis-tegas: #c5ccca;
+  --color-garis-terang: rgb(255 255 255 / 0.18);
+
+  /* Aksen bata, satu-satunya aksen di seluruh situs */
+  --color-bata: #b5462b;
+  --color-bata-gelap: #963a22;
+  --color-bata-lembut: #f6ebe7;
+
+  /* Tipografi */
+  --font-display: var(--font-instrument-serif), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* Radius. Aturannya: tombol 10px, kartu 16px, chip 6px. Tidak ada pil. */
+  --radius-tombol: 10px;
+  --radius-kartu: 16px;
+  --radius-chip: 6px;
+
+  --ease-keluar: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--color-kertas);
+    color: var(--color-teks);
+    font-family: var(--font-sans);
+    /* 17px dasar: pembaca situs ini berusia lebih tua */
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-tinta);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Fokus terlihat jelas, syarat aksesibilitas dasar */
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible {
+    outline: 2px solid var(--color-bata);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-bata);
+    color: #fff;
+  }
+}
+
+/*
+  Transisi masuk antar halaman.
+
+  Hanya opacity yang dianimasikan. Menganimasikan transform akan membuat
+  pembungkusnya menjadi containing block bagi masthead yang position: fixed,
+  dan masthead akan melompat setiap kali transisi berjalan.
+*/
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  /*
+    Tanpa animation-fill-mode, dan itu disengaja.
+
+    Dengan fill "both", keadaan awal keyframe ikut dipertahankan selama animasi
+    belum berjalan. Artinya halaman menahan opacity 0 setiap kali animasinya
+    tidak jadi berjalan, misalnya di tab latar belakang yang dibekukan atau di
+    peramban yang animasinya dimatikan. Itu persis pola yang membuat konten
+    hilang pada bug sebelumnya.
+
+    Tanpa fill-mode, keadaan di luar masa animasi adalah opacity normal, yaitu
+    terlihat. Animasi yang tidak berjalan berarti kehilangan transisi, bukan
+    kehilangan halaman.
+  */
+  .animate-page-in {
+    animation: page-in 0.35s var(--ease-keluar);
+  }
+
+  /*
+    Judul display. Instrument Serif hanya punya satu berat, jadi hierarki
+    dibangun lewat ukuran dan warna, bukan font-weight.
+  */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    /* Ruang bawah untuk descender pada huruf miring seperti "produksi" */
+    line-height: 1.1;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .wrap {
+      padding-inline: 2.5rem;
+    }
+  }
+}
+
+/* Lenis: dibutuhkan agar smooth scroll tidak bertabrakan dengan scroll native */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/*
+  Sengaja TIDAK ada aturan yang menyembunyikan [data-reveal] di berkas ini.
+
+  Versi sebelumnya menyembunyikannya lewat CSS lalu memunculkannya lewat GSAP.
+  Begitu sisi JavaScript-nya tidak berjalan, misalnya karena elemen tersebut
+  baru muncul setelah navigasi antar halaman, konten tertinggal transparan
+  selamanya dan hanya pulih setelah halaman dimuat ulang.
+
+  Sekarang penyembunyian dilakukan GSAP sendiri di MotionProvider, tepat
+  sebelum ia memunculkannya. Bila GSAP gagal dimuat, tidak ada yang
+  menyembunyikan apa pun dan halaman tetap terbaca.
+*/
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
