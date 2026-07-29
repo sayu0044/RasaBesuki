@@ -1,0 +1,689 @@
+/* ==========================================================================
+   COMPONENTS
+   Komponen yang dipakai berulang di banyak halaman. Ditulis di SCSS (bukan
+   utility Tailwind berantai) supaya markup HTML tetap terbaca dan mudah
+   diteruskan ke pengelola berikutnya setelah KKN selesai.
+   ========================================================================== */
+
+/* --- Layout container ------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+  @media (min-width: 1280px) {
+    padding-inline: 2.5rem;
+  }
+}
+
+.wrap--narrow {
+  max-width: 52rem;
+}
+
+/* Ritme vertikal. Mobile lebih rapat, desktop lebih lapang. */
+.section {
+  padding-block: 4.5rem;
+
+  @media (min-width: 768px) {
+    padding-block: 6.5rem;
+  }
+  @media (min-width: 1280px) {
+    padding-block: 8rem;
+  }
+}
+
+.section--tight {
+  padding-block: 3rem;
+
+  @media (min-width: 768px) {
+    padding-block: 4rem;
+  }
+}
+
+/* --- Tombol ------------------------------------------------------------
+   Satu sistem bentuk untuk seluruh website: tombol = pill penuh,
+   kartu = radius 1rem, media = radius 1.25rem.
+   ---------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  // min-height 48px: nyaman ditekan dengan ibu jari.
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.2;
+  // Label tombol tidak boleh pecah dua baris.
+  white-space: nowrap;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--ease-out-soft),
+    color 0.25s var(--ease-out-soft),
+    border-color 0.25s var(--ease-out-soft),
+    transform 0.12s var(--ease-out-soft);
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  .ph {
+    font-size: 1.15em;
+  }
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-on);
+
+  &:hover {
+    background: var(--accent-hover);
+    color: var(--accent-on);
+  }
+}
+
+.btn--ink {
+  background: var(--text-strong);
+  color: var(--surface);
+
+  &:hover {
+    background: var(--color-ink-700);
+    color: #fff;
+  }
+}
+
+.btn--outline {
+  border-color: var(--line-strong);
+  color: var(--text-strong);
+  background: transparent;
+
+  &:hover {
+    border-color: var(--text-strong);
+    background: var(--surface-raised);
+  }
+}
+
+/* Tombol di atas latar gelap. Kontras dijaga tetap lolos WCAG AA. */
+.btn--on-invert {
+  border-color: var(--line-invert);
+  color: var(--text-on-invert);
+  background: transparent;
+
+  &:hover {
+    background: rgb(255 255 255 / 0.1);
+    border-color: rgb(255 255 255 / 0.35);
+    color: #fff;
+  }
+}
+
+/* Tombol nonaktif dipakai saat data (mis. nomor WhatsApp) belum tersedia.
+   Lebih jujur daripada menyembunyikan atau mengarang nomor. */
+.btn[aria-disabled="true"] {
+  background: var(--surface-sunken);
+  // text-body, bukan text-muted, agar rasio kontras di atas surface-sunken
+  // tetap lolos WCAG AA (5.7:1). Tombol nonaktif tetap harus terbaca.
+  color: var(--text-body);
+  border-color: var(--line);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Tautan teks dengan garis bawah yang tumbuh saat hover. */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: var(--text-strong);
+  padding-block: 0.35rem;
+
+  .ph {
+    color: var(--accent-text);
+    transition: transform 0.25s var(--ease-out-soft);
+  }
+
+  &:hover .ph {
+    transform: translateX(3px);
+  }
+}
+
+/* --- Navigasi ---------------------------------------------------------- */
+
+.masthead {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+  transition:
+    background-color 0.3s var(--ease-out-soft),
+    border-color 0.3s var(--ease-out-soft),
+    backdrop-filter 0.3s var(--ease-out-soft);
+  border-bottom: 1px solid transparent;
+}
+
+.masthead__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  // Tinggi navigasi dijaga tetap ramping: 64px mobile, 72px desktop.
+  height: 4rem;
+
+  @media (min-width: 1024px) {
+    height: 4.5rem;
+  }
+}
+
+/* Saat halaman di-scroll, navigasi menempel dengan latar solid. */
+.masthead.is-stuck {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: var(--line);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .masthead.is-stuck {
+    background: var(--surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Navigasi di atas hero gelap: teks putih sampai halaman di-scroll. */
+.masthead--over-hero:not(.is-stuck) {
+  .brand__name,
+  .brand__meta,
+  .nav__link,
+  .masthead__toggle {
+    color: #fff;
+  }
+  .brand__mark {
+    border-color: rgb(255 255 255 / 0.4);
+    color: #fff;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.brand__mark {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: none;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent-text);
+  font-size: 1.1rem;
+}
+
+.brand__name {
+  display: block;
+  color: var(--text-strong);
+  font-weight: 800;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.brand__meta {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+.nav {
+  display: none;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+}
+
+.nav__link {
+  position: relative;
+  color: var(--text-body);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  padding-block: 0.5rem;
+  transition: color 0.2s var(--ease-out-soft);
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0.15rem;
+    width: 100%;
+    height: 1.5px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.28s var(--ease-out-soft);
+  }
+
+  &:hover,
+  &[aria-current="page"] {
+    color: var(--text-strong);
+  }
+
+  &:hover::after,
+  &[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+}
+
+.masthead__toggle {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-right: -0.5rem;
+  border-radius: 999px;
+  color: var(--text-strong);
+  font-size: 1.5rem;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+/* Panel navigasi mobile. Dibuka penuh agar setiap tautan mudah ditekan. */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  transform: translateY(-100%);
+  visibility: hidden;
+  transition:
+    transform 0.42s var(--ease-out-soft),
+    visibility 0s linear 0.42s;
+
+  &.is-open {
+    transform: translateY(0);
+    visibility: visible;
+    transition:
+      transform 0.42s var(--ease-out-soft),
+      visibility 0s linear 0s;
+  }
+
+  // Pembungkus .wrap ikut memanjang agar daftar tautan benar-benar mengisi
+  // tinggi layar dan tetap dapat digulir pada ponsel berlayar pendek.
+  > .wrap {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+.mobile-nav__head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+.mobile-nav__list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  padding-bottom: 3rem;
+}
+
+.mobile-nav__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 0.9rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-strong);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+
+  .ph {
+    color: var(--accent-text);
+    font-size: 1.1rem;
+  }
+
+  &[aria-current="page"] {
+    color: var(--accent-text);
+  }
+}
+
+/* --- Kartu produsen ---------------------------------------------------- */
+
+.producer-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface-raised);
+  transition:
+    border-color 0.3s var(--ease-out-soft),
+    transform 0.3s var(--ease-out-soft);
+
+  &:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-3px);
+  }
+
+  &:hover .producer-card__img {
+    transform: scale(1.04);
+  }
+}
+
+.producer-card__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-sunken);
+}
+
+.producer-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out-soft);
+}
+
+.producer-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+  padding: 1.25rem;
+
+  @media (min-width: 768px) {
+    padding: 1.5rem;
+  }
+}
+
+.producer-card__name {
+  font-size: 1.1875rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.producer-card__place {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+
+  .ph {
+    color: var(--accent-text);
+  }
+}
+
+.producer-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+/* --- Tag layanan pembelian --------------------------------------------- */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.tag--accent {
+  border-color: transparent;
+  background: var(--accent-soft);
+  color: var(--color-ember-700);
+}
+
+@media (prefers-color-scheme: dark) {
+  .tag--accent {
+    color: var(--color-ember-300);
+  }
+}
+
+/* --- Catatan data (dipakai selama data lapangan belum lengkap) ---------- */
+
+.notice {
+  display: flex;
+  gap: 0.85rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 0.5rem;
+  background: var(--surface-raised);
+  color: var(--text-body);
+  font-size: 0.875rem;
+  line-height: 1.6;
+
+  .ph {
+    flex: none;
+    margin-top: 0.15rem;
+    color: var(--accent-text);
+    font-size: 1.1rem;
+  }
+}
+
+/* --- Filter direktori produsen ----------------------------------------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field__label {
+  color: var(--text-strong);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.field__hint {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface-raised);
+  color: var(--text-strong);
+  font-family: inherit;
+  font-size: 1rem;
+
+  &::placeholder {
+    // Kontras placeholder dijaga agar tetap terbaca.
+    color: var(--text-muted);
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-color: transparent;
+  }
+}
+
+.input-group {
+  position: relative;
+
+  .ph {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.15rem;
+    pointer-events: none;
+  }
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface-raised);
+  color: var(--text-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s var(--ease-out-soft),
+    color 0.2s var(--ease-out-soft),
+    border-color 0.2s var(--ease-out-soft);
+
+  &:hover {
+    border-color: var(--text-strong);
+  }
+
+  &[aria-pressed="true"] {
+    background: var(--text-strong);
+    border-color: var(--text-strong);
+    color: var(--surface);
+  }
+}
+
+/* --- Daftar informasi usaha (pengganti tabel di mobile) ----------------- */
+
+.spec {
+  display: grid;
+  gap: 1.25rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.spec__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.spec__key {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.spec__val {
+  color: var(--text-strong);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.spec__val--empty {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* --- Footer ------------------------------------------------------------ */
+
+.footer {
+  background: var(--color-ink-950);
+  color: var(--color-ink-300);
+}
+
+.footer a {
+  color: var(--color-ink-200);
+  transition: color 0.2s var(--ease-out-soft);
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.footer__grid {
+  display: grid;
+  gap: 2.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-block: 1.5rem;
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+  color: var(--color-ink-400);
+  font-size: 0.8125rem;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

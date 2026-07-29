@@ -1,0 +1,594 @@
+/* ==========================================================================
+   SECTIONS
+   Tata letak khas per bagian halaman. Setiap keluarga layout hanya dipakai
+   sekali per halaman supaya halaman tidak terasa berulang.
+   ========================================================================== */
+
+/* --- Hero beranda: gambar penuh dengan konten di bawah kiri ------------- */
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  // svh, bukan vh, agar tinggi tidak melompat saat address bar Safari iOS
+  // muncul dan hilang.
+  min-height: 92svh;
+  padding-top: 6rem;
+  padding-bottom: 3rem;
+  overflow: hidden;
+  background: var(--color-ink-950);
+
+  @media (min-width: 1024px) {
+    min-height: 100svh;
+    padding-bottom: 4.5rem;
+  }
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgb(7 26 33 / 0.94) 8%,
+      rgb(7 26 33 / 0.72) 42%,
+      rgb(7 26 33 / 0.4) 75%,
+      rgb(7 26 33 / 0.55) 100%
+    );
+  }
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.hero__title {
+  color: #fff;
+  font-size: clamp(2.5rem, 8.5vw, 5.25rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  max-width: 15ch;
+}
+
+.hero__lead {
+  margin-top: 1.25rem;
+  max-width: 44ch;
+  color: rgb(255 255 255 / 0.86);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+
+  @media (min-width: 768px) {
+    font-size: 1.1875rem;
+  }
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+/* --- Header halaman dalam ---------------------------------------------- */
+
+.page-head {
+  padding-top: 8rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--line);
+
+  @media (min-width: 1024px) {
+    padding-top: 10.5rem;
+    padding-bottom: 4.5rem;
+  }
+}
+
+.page-head__title {
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  max-width: 18ch;
+}
+
+.page-head__lead {
+  margin-top: 1.25rem;
+  max-width: 52ch;
+  font-size: 1.0625rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.125rem;
+  }
+}
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+
+  a:hover {
+    color: var(--text-strong);
+  }
+
+  .ph {
+    font-size: 0.9rem;
+  }
+}
+
+/* --- Strip angka: dipisah garis tipis, tanpa kotak kartu ---------------- */
+
+.figures {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.figures__item {
+  padding-block: 1.75rem;
+  border-bottom: 1px solid var(--line);
+
+  @media (min-width: 768px) {
+    padding-block: 2.5rem;
+    padding-inline: 2rem;
+    border-bottom: 0;
+    border-left: 1px solid var(--line);
+
+    &:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+}
+
+.figures__num {
+  display: block;
+  color: var(--text-strong);
+  font-size: clamp(2.25rem, 6vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.figures__label {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--text-body);
+  font-size: 0.9375rem;
+}
+
+/* --- Bagian editorial: teks dan gambar dengan offset asimetris ---------- */
+
+.editorial {
+  display: grid;
+  gap: 2.5rem;
+  align-items: start;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 4.5rem;
+  }
+}
+
+.editorial__media {
+  position: relative;
+  border-radius: var(--radius-media);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--surface-sunken);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 1024px) {
+    // Offset ke bawah agar kolom tidak sejajar kaku.
+    margin-top: 3rem;
+  }
+}
+
+.editorial__title {
+  font-size: clamp(1.875rem, 4.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  max-width: 16ch;
+}
+
+.editorial__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  margin-top: 1.5rem;
+  max-width: 58ch;
+  font-size: 1.0625rem;
+}
+
+/* --- Rel proses produksi: geser horizontal dengan scroll-snap ----------- */
+
+.rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 78%;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  // Beri ruang di kiri-kanan agar kartu pertama sejajar dengan container.
+  padding-inline: 1.25rem;
+  padding-bottom: 1rem;
+  margin-inline: -1.25rem;
+  scrollbar-width: thin;
+
+  @media (min-width: 640px) {
+    grid-auto-columns: 42%;
+  }
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+    margin-inline: -2rem;
+  }
+  @media (min-width: 1024px) {
+    grid-auto-columns: 27%;
+  }
+  @media (min-width: 1280px) {
+    padding-inline: 2.5rem;
+    margin-inline: -2.5rem;
+  }
+}
+
+.rail__item {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.rail__media {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--surface-sunken);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.rail__num {
+  color: var(--accent-text);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.rail__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.rail__text {
+  color: var(--text-body);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+/* --- Blok gelap: satu-satunya pembalikan tema per halaman --------------- */
+
+.slab {
+  background: var(--color-ink-900);
+  color: var(--color-ink-200);
+
+  h2,
+  h3 {
+    color: #fff;
+  }
+}
+
+.steps {
+  display: grid;
+  gap: 0;
+  margin-top: 3rem;
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.steps__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-block: 2rem;
+  border-top: 1px solid var(--line-invert);
+
+  @media (min-width: 900px) {
+    padding-block: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+.steps__num {
+  color: var(--color-ember-400);
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.steps__title {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.steps__text {
+  max-width: 34ch;
+  color: var(--color-ink-300);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* --- Ajakan penutup: gambar penuh dengan lapisan gelap ------------------ */
+
+.closer {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-ink-950);
+}
+
+.closer__media {
+  position: absolute;
+  inset: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.42;
+  }
+}
+
+.closer__inner {
+  position: relative;
+  z-index: 1;
+  padding-block: 5rem;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    padding-block: 7.5rem;
+  }
+}
+
+.closer__title {
+  margin-inline: auto;
+  max-width: 20ch;
+  color: #fff;
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+.closer__lead {
+  margin: 1.25rem auto 0;
+  max-width: 46ch;
+  color: rgb(255 255 255 / 0.82);
+  font-size: 1.0625rem;
+}
+
+/* --- Linimasa proses produksi (halaman Proses) -------------------------- */
+
+.timeline {
+  display: grid;
+  gap: 0;
+}
+
+.timeline__step {
+  display: grid;
+  gap: 1.5rem;
+  padding-block: 2.5rem;
+  border-top: 1px solid var(--line);
+
+  @media (min-width: 900px) {
+    grid-template-columns: 5rem 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    padding-block: 3.5rem;
+  }
+}
+
+.timeline__num {
+  color: var(--accent-text);
+  font-size: 1.125rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.timeline__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+
+  @media (min-width: 900px) {
+    font-size: 1.75rem;
+  }
+}
+
+.timeline__text {
+  margin-top: 0.65rem;
+  max-width: 46ch;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.timeline__media {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  aspect-ratio: 16 / 11;
+  background: var(--surface-sunken);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* --- Halaman detail produsen ------------------------------------------- */
+
+.detail-hero {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1.1fr;
+    gap: 4rem;
+  }
+}
+
+.detail-hero__media {
+  border-radius: var(--radius-media);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-sunken);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.detail-hero__title {
+  font-size: clamp(2rem, 5.5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+/* Tombol aksi utama menempel di bawah layar mobile agar WhatsApp dan Maps
+   selalu dalam jangkauan tanpa harus menggulir kembali ke atas. */
+.action-dock {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.75rem 1.25rem calc(0.75rem + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+
+  .btn {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .action-dock {
+    background: var(--surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Ruang di dasar halaman agar baris terakhir footer tidak tertutup action
+   dock. Dock adalah elemen fixed, jadi yang perlu diberi ruang adalah elemen
+   paling bawah halaman, bukan section sebelum footer. */
+body:has(.action-dock) .footer__bottom {
+  padding-bottom: 5.5rem;
+
+  @media (min-width: 1024px) {
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* --- Galeri foto produsen ---------------------------------------------- */
+
+.gallery {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.gallery__item {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: var(--surface-sunken);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  // Foto pertama dibuat lebih besar agar grid punya ritme.
+  &:first-child {
+    grid-column: span 2;
+    aspect-ratio: 2 / 1;
+
+    @media (min-width: 900px) {
+      aspect-ratio: 1;
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+  }
+}
+
+/* --- Kondisi kosong pada hasil pencarian -------------------------------- */
+
+.empty {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block: 4rem;
+  text-align: center;
+
+  &.is-visible {
+    display: flex;
+  }
+
+  .ph {
+    color: var(--text-muted);
+    font-size: 2.5rem;
+  }
+}
