@@ -45,15 +45,49 @@ export function Editorial() {
 
         <div
           data-reveal
-          className="relative aspect-[4/5] overflow-hidden rounded-kartu bg-kertas-tenggelam"
+          className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4"
         >
-          <Image
-            src="/img/about-2.jpg"
-            alt="Proses pembuatan kerupuk ikan di rumah produksi Besuki"
-            fill
-            sizes="(min-width: 1024px) 45vw, 100vw"
-            className="object-cover"
-          />
+          <div className="flex flex-col gap-3 md:gap-4">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-kartu bg-kertas-tenggelam">
+              <Image
+                src="/img/hero/krupuk8.JPG"
+                alt="Dokumentasi rumah produksi kerupuk ikan Besuki"
+                fill
+                sizes="(min-width: 768px) 22vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="relative ml-0 aspect-[3/4] w-full overflow-hidden rounded-kartu bg-kertas-tenggelam md:ml-auto md:w-3/5">
+              <Image
+                src="/img/hero/krupuk5.jpg"
+                alt="Dokumentasi bahan baku produksi kerupuk ikan Besuki"
+                fill
+                sizes="(min-width: 768px) 13vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3 md:gap-4">
+            <div className="relative mr-0 aspect-[3/4] w-full overflow-hidden rounded-kartu bg-kertas-tenggelam md:mr-auto md:w-3/5">
+              <Image
+                src="/img/hero/krupuk7.JPG"
+                alt="Dokumentasi proses produksi kerupuk ikan Besuki"
+                fill
+                sizes="(min-width: 768px) 13vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-kartu bg-kertas-tenggelam">
+              <Image
+                src="/img/hero/krupuk9.jpg"
+                alt="Dokumentasi kerupuk ikan Besuki"
+                fill
+                sizes="(min-width: 768px) 22vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
-import Image from "next/image";
 import { TombolTautan } from "@/components/ui/Button";
+import { HeroSlideshow } from "@/components/home/HeroSlideshow";
 import { sentra } from "@/lib/produsen";
+import { getHeroImages } from "@/lib/heroImages";
 
 /**
  * Hero memakai foto dokumentasi sebagai visual utama, sesuai PLAN.md butir 23
@@ -8,17 +9,12 @@ import { sentra } from "@/lib/produsen";
  * bukan ilustrasi ikan atau kerupuk di setiap section.
  */
 export function Hero() {
+  const heroImages = getHeroImages();
+
   return (
     <section className="relative flex min-h-[100dvh] items-end overflow-hidden bg-laut-950 pt-24 pb-14 lg:pb-20">
       <div className="absolute inset-0">
-        <Image
-          src="/img/carousel-1.jpg"
-          alt="Suasana rumah produksi kerupuk ikan di Kecamatan Besuki"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
+        <HeroSlideshow images={heroImages} />
         {/* Gradien gelap dari bawah supaya teks putih tetap lolos kontras AA */}
         <div
           className="absolute inset-0"
