@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { loadMotionLibs, prefersReducedMotion } from "@/lib/motion";
 
 /**
@@ -26,8 +26,17 @@ import { loadMotionLibs, prefersReducedMotion } from "@/lib/motion";
  *    konten tetap terbaca. Konten yang gagal tampil lebih buruk daripada
  *    konten yang tampil tanpa animasi.
  */
+/**
+ * Ambang reveal, dipakai di dua tempat: sebagai titik picu ScrollTrigger, dan
+ * sebagai penentu elemen mana yang dianggap "sudah dibaca" saat didaftarkan.
+ * Keduanya harus memakai angka yang sama, kalau tidak akan ada elemen yang
+ * dilewati tanpa pernah dianimasikan.
+ */
+const AMBANG = 0.88;
+
 export function MotionProvider() {
   const pathname = usePathname();
+  const muatPertama = useRef(true);
 
   // Lenis dipasang sekali saja. Smooth scroll adalah milik dokumen, bukan
   // milik rute, dan memasangnya ulang tiap navigasi akan mematahkan posisi
@@ -99,13 +108,31 @@ export function MotionProvider() {
           if (batal) return;
 
           const ctx = gsap.context(() => {
-            const target = gsap.utils.toArray<HTMLElement>("[data-reveal]");
-            if (target.length === 0) return;
+            const semua = gsap.utils.toArray<HTMLElement>("[data-reveal]");
+
+            // Pada navigasi antar halaman, bagian yang sudah berada di layar
+            // dibiarkan apa adanya. Pergantian rutenya sendiri sudah ditutupi
+            // tirai di PageTransition, jadi memutar reveal untuk bagian yang
+            // langsung terlihat berarti menumpuk gerakan kedua tepat setelah
+            // tirai membuka. Itu justru yang membuat perpindahan halaman
+            // terasa berkedip. Bagian di bawah lipatan tetap dianimasikan,
+            // karena reveal-nya memang milik scroll, bukan milik navigasi.
+            const antre =
+              muatPertama.current
+                ? semua
+                : semua.filter(
+                    (el) =>
+                      el.getBoundingClientRect().top >
+                      window.innerHeight * AMBANG,
+                  );
+            muatPertama.current = false;
+
+            if (antre.length === 0) return;
 
             // GSAP yang menyembunyikan, sesaat sebelum ia juga yang memunculkan.
-            gsap.set(target, { opacity: 0, y: 8 });
+            gsap.set(antre, { opacity: 0, y: 8 });
 
-            target.forEach((el) => {
+            antre.forEach((el) => {
               gsap.to(el, {
                 opacity: 1,
                 y: 0,
@@ -114,7 +141,7 @@ export function MotionProvider() {
                 scrollTrigger: {
                   trigger: el,
                   // 88% membuat elemen selesai muncul saat benar-benar dibaca.
-                  start: "top 88%",
+                  start: `top ${AMBANG * 100}%`,
                   once: true,
                 },
               });

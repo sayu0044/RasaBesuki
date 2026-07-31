@@ -53,9 +53,8 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         <MotionProvider />
         <InitialLoader />
-        <main className="flex-1">
-          <PageTransition>{children}</PageTransition>
-        </main>
+        <PageTransition />
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>
