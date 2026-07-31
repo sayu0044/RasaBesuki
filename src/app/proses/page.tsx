@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { PageStub } from "@/components/layout/PageStub";
+import { Masthead } from "@/components/layout/Masthead";
+import { ProduksiHero } from "@/components/proses/ProduksiHero";
+import { ProsesSingkat } from "@/components/proses/ProsesSingkat";
 
 export const metadata: Metadata = {
   title: "Proses Produksi",
@@ -9,9 +11,20 @@ export const metadata: Metadata = {
 
 export default function ProsesPage() {
   return (
-    <PageStub
-      judul="Proses Produksi"
-      keterangan="Gambaran umum tahapan pembuatan kerupuk ikan berdasarkan hasil observasi. Setiap rumah produksi bisa memiliki cara yang berbeda."
-    />
+    <>
+      <Masthead diAtasHero />
+      {/*
+        Penanda tak terlihat setinggi banner. Masthead mengamatinya lewat
+        IntersectionObserver untuk tahu kapan harus berubah menjadi solid,
+        mengikuti pola yang sama dengan Hero di halaman Tentang.
+      */}
+      <div
+        id="sentinel-masthead"
+        aria-hidden
+        className="pointer-events-none absolute top-0 h-[62vh] w-px"
+      />
+      <ProduksiHero />
+      <ProsesSingkat />
+    </>
   );
 }
