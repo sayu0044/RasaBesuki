@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local reference materials (not part of the app)
+tentang.html
+script krupuk besuki.pdf
