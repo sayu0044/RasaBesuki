@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -7,10 +8,10 @@ import { List, X } from "@phosphor-icons/react";
 
 export const NAVIGASI = [
   { href: "/", label: "Beranda" },
-  { href: "/tentang", label: "Tentang Sentra" },
-  { href: "/proses", label: "Proses Produksi" },
-  { href: "/produsen", label: "Produsen" },
-  { href: "/kontak", label: "Hubungi Kami" },
+  { href: "/tentang", label: "Tentang Kami" },
+  { href: "/proses", label: "Produksi" },
+  { href: "/produsen", label: "UMKM" },
+  { href: "/kontak", label: "Kontak" },
 ] as const;
 
 /**
@@ -67,21 +68,32 @@ export function Masthead({ diAtasHero = false }: { diAtasHero?: boolean }) {
             : "border-transparent"
         }`}
       >
-        <div className="wrap flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
-          <Link href="/" className="min-w-0">
-            <span
-              className={`display block text-[1.0625rem] leading-tight transition-colors ${
-                terang ? "text-white" : "text-tinta"
-              }`}
-            >
-              Sentra Kerupuk Ikan Besuki
-            </span>
-            <span
-              className={`block text-xs transition-colors ${
-                terang ? "text-white/70" : "text-teks-samar"
-              }`}
-            >
-              Kecamatan Besuki, Situbondo
+        <div className="wrap flex h-16 items-center justify-between gap-4 lg:h-[5.0rem]">
+          <Link href="/" className="flex min-w-0 items-center gap-2.5">
+            <Image
+              src="/img/logo-mark.png"
+              alt=""
+              aria-hidden
+              width={670}
+              height={528}
+              priority
+              className="h-8 w-auto shrink-0 object-contain lg:h-10"
+            />
+            <span className="min-w-0">
+              <span
+                className={`display block text-[1.0625rem] leading-tight transition-colors ${
+                  terang ? "text-white" : "text-tinta"
+                }`}
+              >
+                Sentra Kerupuk Kipas Besuki
+              </span>
+              {/* <span
+                className={`block text-xs transition-colors ${
+                  terang ? "text-white/70" : "text-teks-samar"
+                }`}
+              >
+                Kecamatan Besuki, Situbondo
+              </span> */}
             </span>
           </Link>
 
@@ -125,8 +137,18 @@ export function Masthead({ diAtasHero = false }: { diAtasHero?: boolean }) {
       {menuTerbuka && (
         <div className="fixed inset-0 z-60 flex flex-col bg-kertas lg:hidden">
           <div className="wrap flex h-16 items-center justify-between">
-            <span className="display text-[1.0625rem] text-tinta">
-              Sentra Kerupuk Ikan Besuki
+            <span className="flex items-center gap-2.5">
+              <Image
+                src="/img/logo-mark.png"
+                alt=""
+                aria-hidden
+                width={670}
+                height={528}
+                className="h-8 w-auto shrink-0 object-contain"
+              />
+              <span className="display text-[1.0625rem] text-tinta">
+                Sentra Kerupuk Kipas Besuki
+              </span>
             </span>
             <button
               type="button"
