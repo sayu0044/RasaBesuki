@@ -97,53 +97,73 @@
   }
 
   /*
-    Batang gulir tipis, mengikuti warna garis situs.
+    Batang gulir: satu batang bata tipis, tanpa apa pun yang lain.
 
-    Bawaan Windows memberi batang setebal 17px dengan palet abu-abu sistem
-    yang tidak ada hubungannya dengan tema mana pun. Di halaman yang seluruh
-    garisnya hairline, batang setebal itu menjadi elemen paling tebal di
-    layar.
+    Bawaan Windows memberi batang abu-abu tebal lengkap dengan tombol panah
+    di kedua ujungnya. Di halaman yang seluruh garisnya hairline, batang itu
+    menjadi elemen paling tebal di layar sekaligus satu-satunya bagian yang
+    warnanya datang dari sistem operasi, bukan dari tema situs.
 
-    Contoh yang dirujuk menyembunyikan batangnya sama sekali. Di sini batang
-    tetap ditampilkan, hanya ditipiskan: situs ini punya halaman panjang dan
-    pembacanya berusia lebih tua, jadi petunjuk posisi baca lebih berguna
-    daripada layar yang bersih tanpa syarat.
+    Dua jalur di bawah sengaja dipisah, dan pemisahannya bukan gaya-gayaan.
+    Chromium sejak versi 121 mengenal scrollbar-width dan scrollbar-color,
+    dan begitu salah satunya diset, ia MENGABAIKAN seluruh aturan
+    ::-webkit-scrollbar. Padahal hanya lewat ::-webkit-scrollbar tombol panah
+    bisa dimatikan dan border thumb bisa dihapus; scrollbar-color tidak punya
+    kendali atas keduanya. Menulis keduanya untuk peramban yang sama berarti
+    yang menang justru jalur yang paling sedikit bisa diatur.
 
-    Warna thumb memakai garis-tegas, bukan bata. Bata adalah satu-satunya
-    aksen di seluruh situs dan dipakai untuk menandai hal yang dipilih, bukan
-    untuk perkakas peramban.
+    Karena itu properti standar dibatasi pada peramban yang memang tidak
+    punya ::-webkit-scrollbar, yaitu Firefox. Firefox tidak mengenal selektor
+    itu sehingga selector() bernilai salah di sana dan benar di Chromium.
   */
-  html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-garis-tegas) transparent;
+  @supports not selector(::-webkit-scrollbar) {
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-bata) transparent;
+    }
   }
 
-  /*
-    Cadangan untuk Chromium di bawah 121 dan Safari, yang belum mengenal dua
-    properti standar di atas. Peramban yang mengenal keduanya mengabaikan
-    blok ini, jadi keduanya tidak akan pernah berlaku bersamaan.
-
-    Lebarnya 11px, tapi thumb-nya diberi border setebal 3px sewarna latar
-    sehingga yang terlihat hanya sekitar 5px. Border itu juga yang memberi
-    jarak dari tepi layar; tanpa itu thumb menempel di kaca.
-  */
+  /* Chromium dan Safari, tempat setiap bagian batang bisa diatur sendiri. */
   html::-webkit-scrollbar {
-    width: 11px;
-    height: 11px;
+    width: 8px;
+    height: 8px;
   }
 
+  /* Lajur dibiarkan tembus pandang supaya tidak ada kolom abu-abu di tepi. */
   html::-webkit-scrollbar-track {
     background: transparent;
   }
 
+  /*
+    Tanpa border sama sekali. Versi sebelumnya memakai border sewarna kertas
+    untuk menipiskan thumb dari dalam, tapi di layar itu terbaca sebagai
+    bingkai putih mengelilingi batang. Menipiskan batangnya langsung lewat
+    width lebih jujur dan tidak meninggalkan garis apa pun.
+  */
   html::-webkit-scrollbar-thumb {
-    background-color: var(--color-garis-tegas);
-    border: 3px solid var(--color-kertas);
+    background-color: var(--color-bata);
+    border: none;
     border-radius: 999px;
   }
 
   html::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-teks-samar);
+    background-color: var(--color-bata-gelap);
+  }
+
+  /*
+    Tombol panah di kedua ujung dimatikan. Keduanya perlu disebut: tanpa
+    display none Chromium tetap menyediakan ruang untuknya, dan tanpa ukuran
+    nol sebagian versi masih menggambar kotak kosong di sana.
+  */
+  html::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* Sudut pertemuan batang tegak dan mendatar, agar tidak muncul kotak abu. */
+  html::-webkit-scrollbar-corner {
+    background: transparent;
   }
 }
 
