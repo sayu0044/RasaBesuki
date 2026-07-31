@@ -81,7 +81,7 @@ export function Masthead({ diAtasHero = false }: { diAtasHero?: boolean }) {
             />
             <span className="min-w-0">
               <span
-                className={`display block text-[1.0625rem] leading-tight transition-colors ${
+                className={`display block text-[1.1875rem] leading-tight transition-colors ${
                   terang ? "text-white" : "text-tinta"
                 }`}
               >
@@ -146,7 +146,7 @@ export function Masthead({ diAtasHero = false }: { diAtasHero?: boolean }) {
                 height={528}
                 className="h-8 w-auto shrink-0 object-contain"
               />
-              <span className="display text-[1.0625rem] text-tinta">
+              <span className="display text-[1.1875rem] text-tinta">
                 Sentra Kerupuk Kipas Besuki
               </span>
             </span>
