@@ -12,7 +12,7 @@ export function Hero() {
   const heroImages = getHeroImages();
 
   return (
-    <section className="relative flex min-h-[100dvh] items-end overflow-hidden bg-laut-950 pt-24 pb-14 lg:pb-20">
+    <section className="relative flex min-h-[100svh] items-end overflow-hidden bg-laut-950 pt-24 pb-14 lg:pb-20">
       <div className="absolute inset-0">
         <HeroSlideshow images={heroImages} />
         {/* Gradien gelap dari bawah supaya teks putih tetap lolos kontras AA */}

@@ -18,7 +18,7 @@ export default function Home() {
       <div
         id="sentinel-masthead"
         aria-hidden
-        className="pointer-events-none absolute top-0 h-[90dvh] w-px"
+        className="pointer-events-none absolute top-0 h-[90svh] w-px"
       />
       <Hero />
       <Figures />
