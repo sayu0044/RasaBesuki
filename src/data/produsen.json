@@ -55,7 +55,7 @@
       "melayani_reseller": null,
       "catatan_produksi": null,
       "foto_utama": "img/logo (2).png",
-      "foto_galeri": ["img/about-1.jpg", "img/about-2.jpg", "img/about-3.jpg"]
+      "foto_galeri": []
     },
     {
       "id": "rumah-produksi-02",
@@ -75,7 +75,7 @@
       "melayani_reseller": null,
       "catatan_produksi": null,
       "foto_utama": "img/hero/krupuk10.jpg",
-      "foto_galeri": ["img/about-2.jpg", "img/about-4.jpg", "img/about-5.jpg"]
+      "foto_galeri": []
     },
     {
       "id": "rumah-produksi-07",
@@ -95,7 +95,7 @@
       "melayani_reseller": null,
       "catatan_produksi": null,
       "foto_utama": "img/hero/krupuk5.jpg",
-      "foto_galeri": ["img/about-1.jpg", "img/about-5.jpg", "img/about-6.jpg"]
+      "foto_galeri": []
     },
     {
       "id": "rumah-produksi-03",
@@ -115,7 +115,7 @@
       "melayani_reseller": null,
       "catatan_produksi": null,
       "foto_utama": "img/logo (2).png",
-      "foto_galeri": ["img/about-3.jpg", "img/about-6.jpg", "img/about-1.jpg"]
+      "foto_galeri": []
     },
     {
       "id": "rumah-produksi-04",
@@ -135,7 +135,7 @@
       "melayani_reseller": null,
       "catatan_produksi": null,
       "foto_utama": "img/logo (2).png",
-      "foto_galeri": ["img/about-4.jpg", "img/about-1.jpg", "img/about-2.jpg"]
+      "foto_galeri": []
     },
     {
       "id": "rumah-produksi-05",
@@ -155,7 +155,7 @@
       "melayani_reseller": null,
       "catatan_produksi": null,
       "foto_utama": "img/logo (2).png",
-      "foto_galeri": ["img/about-5.jpg", "img/about-2.jpg", "img/about-3.jpg"]
+      "foto_galeri": []
     },
     {
       "id": "rumah-produksi-06",
@@ -175,7 +175,7 @@
       "melayani_reseller": null,
       "catatan_produksi": null,
       "foto_utama": "img/logo (2).png",
-      "foto_galeri": ["img/about-6.jpg", "img/about-3.jpg", "img/about-4.jpg"]
+      "foto_galeri": []
     },
     {
       "id": "rumah-produksi-08",
@@ -195,7 +195,7 @@
       "melayani_reseller": null,
       "catatan_produksi": null,
       "foto_utama": "img/logo (2).png",
-      "foto_galeri": ["img/product-1.jpg", "img/about-3.jpg", "img/about-4.jpg"]
+      "foto_galeri": []
     },
     {
       "id": "rumah-produksi-09",
@@ -214,8 +214,8 @@
       "melayani_grosir": null,
       "melayani_reseller": null,
       "catatan_produksi": null,
-      "foto_utama": "img/about-4.jpg",
-      "foto_galeri": ["img/product-2.jpg", "img/about-5.jpg", "img/about-1.jpg"]
+      "foto_utama": "img/logo (2).png",
+      "foto_galeri": []
     },
     {
       "id": "rumah-produksi-10",
@@ -234,8 +234,8 @@
       "melayani_grosir": null,
       "melayani_reseller": null,
       "catatan_produksi": null,
-      "foto_utama": "img/about-6.jpg",
-      "foto_galeri": ["img/product-3.jpg", "img/about-2.jpg", "img/about-3.jpg"]
+      "foto_utama": "img/logo (2).png",
+      "foto_galeri": []
     }
   ]
 }
