@@ -23,7 +23,7 @@
   ],
 
   "sentra": {
-    "nama": "Sentra Kerupuk Ikan Besuki",
+    "nama": "Sentra Kerupuk Kipas Besuki",
     "tagline": "Cerita rasa dari rumah-rumah produksi Besuki.",
     "base_url": null,
     "kecamatan": "Besuki",
@@ -31,8 +31,8 @@
     "provinsi": "Jawa Timur",
     "whatsapp_admin": null,
     "email": null,
-    "pesan_wa_default": "Halo, saya mengetahui usaha Anda melalui website Sentra Kerupuk Ikan Besuki. Saya ingin mengetahui informasi mengenai ketersediaan kerupuk saat ini.",
-    "penyelenggara": "Kelompok KKN di Kecamatan Besuki, Situbondo",
+    "pesan_wa_default": "Halo, saya mengetahui usaha Anda melalui website Sentra Kerupuk Kipas Besuki. Saya ingin mengetahui informasi mengenai ketersediaan kerupuk saat ini.",
+    "penyelenggara": "BBK8 UNAIR Kelompok 2 Besuki, Situbondo",
     "tahun": "2026"
   },
 
@@ -54,7 +54,7 @@
       "melayani_grosir": null,
       "melayani_reseller": null,
       "catatan_produksi": null,
-      "foto_utama": "img/product-1.jpg",
+      "foto_utama": "img/logo (2).png",
       "foto_galeri": ["img/about-1.jpg", "img/about-2.jpg", "img/about-3.jpg"]
     },
     {
@@ -74,8 +74,28 @@
       "melayani_grosir": null,
       "melayani_reseller": null,
       "catatan_produksi": null,
-      "foto_utama": "img/product-2.jpg",
+      "foto_utama": "img/hero/krupuk10.jpg",
       "foto_galeri": ["img/about-2.jpg", "img/about-4.jpg", "img/about-5.jpg"]
+    },
+    {
+      "id": "rumah-produksi-07",
+      "terverifikasi": false,
+      "nama_usaha": "Rumah Produksi Bu Tris",
+      "nama_pemilik": "Bu Tris",
+      "tahun_mulai": "2020",
+      "desa": "Besuki",
+      "kecamatan": "Besuki",
+      "alamat": "Jl jokotole rt 03/02 Besuki situbondo",
+      "maps_url": "https://maps.app.goo.gl/g4kowHmK2PT2cT5K9",
+      "whatsapp": "082301571398",
+      "deskripsi": "Waktu santai terasa lebih lengkap dengan Kerupuk Kipas. Bentuknya yang unik, teksturnya yang renyah, serta rasa gurih yang menggoda menjadikannya camilan yang pas untuk menemani berbagai aktivitas. Nikmati langsung dari kemasan atau sajikan bersama makanan favorit Anda. Kerupuk Kipas cocok untuk menemani waktu nonton, ngobrol, minum teh, hingga berkumpul bersama keluarga.",
+      "produk": [],
+      "melayani_eceran": null,
+      "melayani_grosir": null,
+      "melayani_reseller": null,
+      "catatan_produksi": null,
+      "foto_utama": "img/hero/krupuk5.jpg",
+      "foto_galeri": ["img/about-1.jpg", "img/about-5.jpg", "img/about-6.jpg"]
     },
     {
       "id": "rumah-produksi-03",
@@ -94,7 +114,7 @@
       "melayani_grosir": null,
       "melayani_reseller": null,
       "catatan_produksi": null,
-      "foto_utama": "img/product-3.jpg",
+      "foto_utama": "img/logo (2).png",
       "foto_galeri": ["img/about-3.jpg", "img/about-6.jpg", "img/about-1.jpg"]
     },
     {
@@ -114,7 +134,7 @@
       "melayani_grosir": null,
       "melayani_reseller": null,
       "catatan_produksi": null,
-      "foto_utama": "img/product-4.jpg",
+      "foto_utama": "img/logo (2).png",
       "foto_galeri": ["img/about-4.jpg", "img/about-1.jpg", "img/about-2.jpg"]
     },
     {
@@ -134,7 +154,7 @@
       "melayani_grosir": null,
       "melayani_reseller": null,
       "catatan_produksi": null,
-      "foto_utama": "img/store-product-1.jpg",
+      "foto_utama": "img/logo (2).png",
       "foto_galeri": ["img/about-5.jpg", "img/about-2.jpg", "img/about-3.jpg"]
     },
     {
@@ -154,28 +174,8 @@
       "melayani_grosir": null,
       "melayani_reseller": null,
       "catatan_produksi": null,
-      "foto_utama": "img/store-product-2.jpg",
+      "foto_utama": "img/logo (2).png",
       "foto_galeri": ["img/about-6.jpg", "img/about-3.jpg", "img/about-4.jpg"]
-    },
-    {
-      "id": "rumah-produksi-07",
-      "terverifikasi": false,
-      "nama_usaha": "Rumah Produksi Bu Tris",
-      "nama_pemilik": "Bu Tris",
-      "tahun_mulai": "2020",
-      "desa": "Besuki",
-      "kecamatan": "Besuki",
-      "alamat": "Jl jokotole rt 03/02 Besuki situbondo",
-      "maps_url": "https://maps.app.goo.gl/g4kowHmK2PT2cT5K9",
-      "whatsapp": "082301571398",
-      "deskripsi": "Waktu santai terasa lebih lengkap dengan Kerupuk Kipas. Bentuknya yang unik, teksturnya yang renyah, serta rasa gurih yang menggoda menjadikannya camilan yang pas untuk menemani berbagai aktivitas. Nikmati langsung dari kemasan atau sajikan bersama makanan favorit Anda. Kerupuk Kipas cocok untuk menemani waktu nonton, ngobrol, minum teh, hingga berkumpul bersama keluarga.",
-      "produk": [],
-      "melayani_eceran": null,
-      "melayani_grosir": null,
-      "melayani_reseller": null,
-      "catatan_produksi": null,
-      "foto_utama": "img/store-product-3.jpg",
-      "foto_galeri": ["img/about-1.jpg", "img/about-5.jpg", "img/about-6.jpg"]
     },
     {
       "id": "rumah-produksi-08",
@@ -194,7 +194,7 @@
       "melayani_grosir": null,
       "melayani_reseller": null,
       "catatan_produksi": null,
-      "foto_utama": "img/about-2.jpg",
+      "foto_utama": "img/logo (2).png",
       "foto_galeri": ["img/product-1.jpg", "img/about-3.jpg", "img/about-4.jpg"]
     },
     {

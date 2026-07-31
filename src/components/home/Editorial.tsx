@@ -51,7 +51,7 @@ export function Editorial() {
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-kartu bg-kertas-tenggelam">
               <Image
                 src="/img/hero/krupuk8.JPG"
-                alt="Dokumentasi rumah produksi kerupuk ikan Besuki"
+                alt="Dokumentasi rumah produksi kerupuk kipas Besuki"
                 fill
                 sizes="(min-width: 768px) 22vw, 90vw"
                 className="object-cover"
@@ -59,8 +59,8 @@ export function Editorial() {
             </div>
             <div className="relative ml-0 aspect-[3/4] w-full overflow-hidden rounded-kartu bg-kertas-tenggelam md:ml-auto md:w-3/5">
               <Image
-                src="/img/hero/krupuk5.jpg"
-                alt="Dokumentasi bahan baku produksi kerupuk ikan Besuki"
+                src="/img/hero/krupuk3.jpg"
+                alt="Dokumentasi bahan baku produksi kerupuk kipas Besuki"
                 fill
                 sizes="(min-width: 768px) 13vw, 90vw"
                 className="object-cover"
@@ -72,7 +72,7 @@ export function Editorial() {
             <div className="relative mr-0 aspect-[3/4] w-full overflow-hidden rounded-kartu bg-kertas-tenggelam md:mr-auto md:w-3/5">
               <Image
                 src="/img/hero/krupuk7.JPG"
-                alt="Dokumentasi proses produksi kerupuk ikan Besuki"
+                alt="Dokumentasi proses produksi kerupuk kipas Besuki"
                 fill
                 sizes="(min-width: 768px) 13vw, 90vw"
                 className="object-cover"
@@ -81,7 +81,7 @@ export function Editorial() {
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-kartu bg-kertas-tenggelam">
               <Image
                 src="/img/hero/krupuk9.jpg"
-                alt="Dokumentasi kerupuk ikan Besuki"
+                alt="Dokumentasi kerupuk Kipas Besuki"
                 fill
                 sizes="(min-width: 768px) 22vw, 90vw"
                 className="object-cover"

@@ -40,7 +40,7 @@ export function Hero() {
         </h1>
 
         <p className="mt-5 max-w-[44ch] text-white/85">
-          Kenali lebih dekat para pelaku UMKM kerupuk ikan rumahan di Kecamatan
+          Kenali lebih dekat para pelaku UMKM kerupuk kipas rumahan di Kecamatan
           Besuki, Situbondo.
         </p>
 
