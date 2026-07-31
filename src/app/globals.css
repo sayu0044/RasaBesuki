@@ -98,39 +98,16 @@
 }
 
 /*
-  Transisi masuk antar halaman.
+  Sengaja TIDAK ada animasi masuk halaman di berkas ini.
 
-  Hanya opacity yang dianimasikan. Menganimasikan transform akan membuat
-  pembungkusnya menjadi containing block bagi masthead yang position: fixed,
-  dan masthead akan melompat setiap kali transisi berjalan.
+  Versi sebelumnya memutar fade pada pembungkus halaman setiap kali rute
+  berganti, di atas penanda tunggu bawaan App Router dan di atas reveal
+  per-bagian milik GSAP. Tiga gerakan berbeda untuk satu klik. Sekarang
+  pergantian rute dimiliki satu pihak saja, yaitu tirai di PageTransition,
+  dan pergantiannya terjadi di balik tirai itu.
 */
-@keyframes page-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
 @layer utilities {
-  /*
-    Tanpa animation-fill-mode, dan itu disengaja.
-
-    Dengan fill "both", keadaan awal keyframe ikut dipertahankan selama animasi
-    belum berjalan. Artinya halaman menahan opacity 0 setiap kali animasinya
-    tidak jadi berjalan, misalnya di tab latar belakang yang dibekukan atau di
-    peramban yang animasinya dimatikan. Itu persis pola yang membuat konten
-    hilang pada bug sebelumnya.
-
-    Tanpa fill-mode, keadaan di luar masa animasi adalah opacity normal, yaitu
-    terlihat. Animasi yang tidak berjalan berarti kehilangan transisi, bukan
-    kehilangan halaman.
-  */
-  .animate-page-in {
-    animation: page-in 0.35s var(--ease-keluar);
-  }
-
   /*
     Judul display. Instrument Serif hanya punya satu berat, jadi hierarki
     dibangun lewat ukuran dan warna, bukan font-weight.
