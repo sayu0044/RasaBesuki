@@ -108,13 +108,34 @@ export function Masthead({ diAtasHero = false }: { diAtasHero?: boolean }) {
                   key={item.href}
                   href={item.href}
                   aria-current={aktif ? "page" : undefined}
-                  className={`text-[0.9375rem] transition-colors ${
+                  className={`relative text-[0.9375rem] transition-colors ${
                     terang
-                      ? "text-white/80 hover:text-white aria-[current=page]:text-white"
+                      ? "text-white/60 hover:text-white/90 aria-[current=page]:text-white"
                       : "text-teks hover:text-tinta aria-[current=page]:text-bata"
                   }`}
                 >
                   {item.label}
+                  {/*
+                    Penanda halaman aktif dibuat dari garis, bukan dari warna
+                    saja. Di atas hero, satu-satunya warna yang tersedia adalah
+                    putih di atas foto gelap, dan beda antara putih 80% dan
+                    putih penuh tidak terbaca sebagai "yang ini sedang dibuka".
+                    Garis punya keberadaan yang tidak bergantung pada seberapa
+                    terang latar fotonya.
+
+                    Garisnya diposisikan absolut supaya tidak ikut menambah
+                    tinggi tautan. Kalau ia ikut mengalir, item yang aktif akan
+                    lebih tinggi dari tetangganya dan seluruh baris navigasi
+                    bergeser setiap kali halaman berganti.
+                  */}
+                  {aktif && (
+                    <span
+                      aria-hidden
+                      className={`absolute -bottom-1.5 left-0 right-0 h-px ${
+                        terang ? "bg-white" : "bg-bata"
+                      }`}
+                    />
+                  )}
                 </Link>
               );
             })}

@@ -95,6 +95,56 @@
     background: var(--color-bata);
     color: #fff;
   }
+
+  /*
+    Batang gulir tipis, mengikuti warna garis situs.
+
+    Bawaan Windows memberi batang setebal 17px dengan palet abu-abu sistem
+    yang tidak ada hubungannya dengan tema mana pun. Di halaman yang seluruh
+    garisnya hairline, batang setebal itu menjadi elemen paling tebal di
+    layar.
+
+    Contoh yang dirujuk menyembunyikan batangnya sama sekali. Di sini batang
+    tetap ditampilkan, hanya ditipiskan: situs ini punya halaman panjang dan
+    pembacanya berusia lebih tua, jadi petunjuk posisi baca lebih berguna
+    daripada layar yang bersih tanpa syarat.
+
+    Warna thumb memakai garis-tegas, bukan bata. Bata adalah satu-satunya
+    aksen di seluruh situs dan dipakai untuk menandai hal yang dipilih, bukan
+    untuk perkakas peramban.
+  */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-garis-tegas) transparent;
+  }
+
+  /*
+    Cadangan untuk Chromium di bawah 121 dan Safari, yang belum mengenal dua
+    properti standar di atas. Peramban yang mengenal keduanya mengabaikan
+    blok ini, jadi keduanya tidak akan pernah berlaku bersamaan.
+
+    Lebarnya 11px, tapi thumb-nya diberi border setebal 3px sewarna latar
+    sehingga yang terlihat hanya sekitar 5px. Border itu juga yang memberi
+    jarak dari tepi layar; tanpa itu thumb menempel di kaca.
+  */
+  html::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background-color: var(--color-garis-tegas);
+    border: 3px solid var(--color-kertas);
+    border-radius: 999px;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-teks-samar);
+  }
 }
 
 /*
