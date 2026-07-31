@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Masthead } from "@/components/layout/Masthead";
 import { ProducerCard } from "@/components/producer/ProducerCard";
+import { ProdusenHero } from "@/components/producer/ProdusenHero";
 import { getAllProdusen } from "@/lib/produsen";
 
 export const metadata: Metadata = {
   title: "Temukan Produsen",
   description:
-    "Daftar rumah produksi kerupuk ikan rumahan di Kecamatan Besuki, Situbondo.",
+    "Daftar rumah produksi kerupuk kipas rumahan di Kecamatan Besuki, Situbondo.",
 };
 
 /**
@@ -23,16 +24,18 @@ export default function ProdusenPage() {
 
   return (
     <>
-      <Masthead />
-
-      <div className="wrap border-b border-garis pt-32 pb-14 lg:pt-40 lg:pb-20">
-        <h1 className="display max-w-[16ch] text-[2.25rem] text-tinta sm:text-[3rem]">
-          Temukan Produsen
-        </h1>
-        <p className="mt-5 max-w-[50ch]">
-          Kenali rumah produksi kerupuk ikan di Kecamatan Besuki.
-        </p>
-      </div>
+      <Masthead diAtasHero />
+      {/*
+        Penanda tak terlihat setinggi banner. Masthead mengamatinya lewat
+        IntersectionObserver untuk tahu kapan harus berubah menjadi solid,
+        mengikuti pola yang sama dengan Hero di halaman Tentang dan Proses.
+      */}
+      <div
+        id="sentinel-masthead"
+        aria-hidden
+        className="pointer-events-none absolute top-0 h-[62vh] w-px"
+      />
+      <ProdusenHero />
 
       <div className="wrap py-14 md:py-20">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
