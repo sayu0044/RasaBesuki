@@ -23,7 +23,7 @@ export function ProdukVarian() {
   return (
     <section className="bg-kertas-tenggelam py-14 md:py-20 lg:py-28">
       <div className="wrap">
-        <div data-reveal>
+        <div data-reveal suppressHydrationWarning>
           <p className="text-xs font-semibold tracking-[0.16em] text-bata uppercase">
             Produk
           </p>
@@ -34,7 +34,12 @@ export function ProdukVarian() {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2">
           {VARIAN.map((item) => (
-            <div key={item.nama} data-reveal className="flex items-start gap-4">
+            <div
+              key={item.nama}
+              data-reveal
+              suppressHydrationWarning
+              className="flex items-start gap-4"
+            >
               <div className="relative aspect-4/3 w-40 shrink-0 overflow-hidden rounded-kartu bg-permukaan sm:w-48">
                 <Image
                   src={item.foto}
@@ -56,7 +61,11 @@ export function ProdukVarian() {
           ))}
         </div>
 
-        <div data-reveal className="mt-12 border-t border-garis-tegas pt-8">
+        <div
+          data-reveal
+          suppressHydrationWarning
+          className="mt-12 border-t border-garis-tegas pt-8"
+        >
           <p className="text-xs font-semibold tracking-[0.12em] text-teks-samar uppercase">
             Sudah Menjangkau
           </p>

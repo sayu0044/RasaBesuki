@@ -10,6 +10,7 @@ export function Sejarah() {
       <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16">
         <div
           data-reveal
+          suppressHydrationWarning
           className="relative mx-auto aspect-4/5 w-full max-w-[14rem] overflow-hidden rounded-kartu bg-kertas-tenggelam lg:order-2 lg:max-w-[25rem]"
         >
           <Image
@@ -21,7 +22,7 @@ export function Sejarah() {
           />
         </div>
 
-        <div data-reveal className="lg:order-1 lg:pt-10">
+        <div data-reveal suppressHydrationWarning className="lg:order-1 lg:pt-10">
           <p className="text-xs font-semibold tracking-[0.16em] text-bata uppercase">
             Sejarah
           </p>

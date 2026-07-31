@@ -41,6 +41,7 @@ export function Figures() {
           <div
             key={item.label}
             data-reveal
+            suppressHydrationWarning
             className={
               i === 0
                 ? "md:pr-8"

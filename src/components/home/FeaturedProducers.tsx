@@ -13,6 +13,7 @@ export function FeaturedProducers() {
       <div className="wrap">
         <h2
           data-reveal
+          suppressHydrationWarning
           className="display max-w-[18ch] text-[2rem] text-tinta sm:text-[2.5rem]"
         >
           Rumah produksi yang bisa Anda kenali
@@ -20,7 +21,7 @@ export function FeaturedProducers() {
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {sorotan.map((produsen) => (
-            <div key={produsen.id} data-reveal>
+            <div key={produsen.id} data-reveal suppressHydrationWarning>
               <ProducerCard produsen={produsen} />
             </div>
           ))}
@@ -28,6 +29,7 @@ export function FeaturedProducers() {
 
         <div
           data-reveal
+          suppressHydrationWarning
           className="mt-10 flex flex-col items-start gap-4 border-t border-garis pt-8 sm:flex-row sm:items-center sm:justify-between"
         >
           {sisa > 0 && (

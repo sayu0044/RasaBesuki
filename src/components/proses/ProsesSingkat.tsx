@@ -56,7 +56,7 @@ const CUACA = [
 export function ProsesSingkat() {
   return (
     <section className="wrap py-14 md:py-20 lg:py-28">
-      <div data-reveal>
+      <div data-reveal suppressHydrationWarning>
         <p className="text-xs font-semibold tracking-[0.16em] text-bata uppercase">
           Cara Pembuatan
         </p>
@@ -73,6 +73,7 @@ export function ProsesSingkat() {
           >
             <div
               data-reveal
+              suppressHydrationWarning
               className={`relative mx-auto aspect-4/3 w-full max-w-xs overflow-hidden rounded-kartu bg-kertas-tenggelam sm:mx-0 ${
                 i % 2 === 1 ? "sm:order-2" : ""
               }`}
@@ -86,7 +87,11 @@ export function ProsesSingkat() {
               />
             </div>
 
-            <div data-reveal className={i % 2 === 1 ? "sm:order-1" : ""}>
+            <div
+              data-reveal
+              suppressHydrationWarning
+              className={i % 2 === 1 ? "sm:order-1" : ""}
+            >
               <span className="font-mono text-sm text-teks-samar tabular-nums">
                 {tahap.nomor}
               </span>
@@ -106,6 +111,7 @@ export function ProsesSingkat() {
           <div
             key={item.label}
             data-reveal
+            suppressHydrationWarning
             className={i === 0 ? "sm:pr-8" : "sm:border-l sm:border-garis sm:pl-8"}
           >
             <p className="text-xs font-semibold tracking-[0.12em] text-teks-samar uppercase">

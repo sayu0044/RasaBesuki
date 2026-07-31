@@ -40,7 +40,7 @@ export default function ProdusenPage() {
       <div className="wrap py-14 md:py-20">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {produsen.map((item) => (
-            <div key={item.id} data-reveal>
+            <div key={item.id} data-reveal suppressHydrationWarning>
               <ProducerCard produsen={item} />
             </div>
           ))}

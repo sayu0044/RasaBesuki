@@ -26,11 +26,16 @@ export function HowToBuy() {
       <div className="wrap">
         <h2
           data-reveal
+          suppressHydrationWarning
           className="display max-w-[16ch] text-[2rem] text-white sm:text-[2.5rem]"
         >
           Bagaimana Cara Membeli?
         </h2>
-        <p data-reveal className="mt-4 max-w-[50ch] text-white/70">
+        <p
+          data-reveal
+          suppressHydrationWarning
+          className="mt-4 max-w-[50ch] text-white/70"
+        >
           Situs ini tidak memproses pesanan maupun pembayaran. Pembelian
           dilakukan langsung dengan produsen.
         </p>
@@ -40,6 +45,7 @@ export function HowToBuy() {
             <div
               key={langkah.nomor}
               data-reveal
+              suppressHydrationWarning
               className="flex flex-col gap-2.5 border-t border-white/15 py-8 md:pr-10"
             >
               {/* white/60, bukan white/50: pada 14px yang terakhir hanya pas

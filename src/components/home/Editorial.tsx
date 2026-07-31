@@ -13,7 +13,7 @@ export function Editorial() {
   return (
     <section className="wrap py-14 md:py-20 lg:py-28">
       <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
-        <div data-reveal className="lg:pt-10">
+        <div data-reveal suppressHydrationWarning className="lg:pt-10">
           <h2 className="display max-w-[16ch] text-[2rem] text-tinta sm:text-[2.5rem] lg:text-[3rem]">
             Dibuat dari Rumah, Tumbuh dari Besuki
           </h2>
@@ -38,13 +38,14 @@ export function Editorial() {
 
           <div className="mt-8">
             <TombolTautan href="/tentang" ragam="garis">
-              Baca Cerita Sentra
+              Baca Cerita Selengkapnya
             </TombolTautan>
           </div>
         </div>
 
         <div
           data-reveal
+          suppressHydrationWarning
           className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4"
         >
           <div className="flex flex-col gap-3 md:gap-4">

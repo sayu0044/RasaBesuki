@@ -10,7 +10,7 @@
 export function TentangCloser() {
   return (
     <section className="wrap py-14 md:py-20 lg:py-28">
-      <div data-reveal className="mx-auto max-w-2xl text-center">
+      <div data-reveal suppressHydrationWarning className="mx-auto max-w-2xl text-center">
         <p className="text-xs font-semibold tracking-[0.16em] text-bata uppercase">
           Video
         </p>
@@ -22,6 +22,7 @@ export function TentangCloser() {
 
       <div
         data-reveal
+        suppressHydrationWarning
         className="relative mx-auto mt-10 aspect-video w-full max-w-3xl overflow-hidden rounded-kartu bg-laut-950"
       >
         <video
