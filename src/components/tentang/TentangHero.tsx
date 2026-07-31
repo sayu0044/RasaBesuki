@@ -13,7 +13,7 @@ export function TentangHero() {
     <section className="relative flex min-h-[56vh] items-end overflow-hidden bg-laut-950 pt-32 pb-14 lg:min-h-[62vh] lg:pt-40 lg:pb-20">
       <div className="absolute inset-0">
         <Image
-          src="/img/hero/krupuk7.jpg"
+          src="/img/hero/krupuk7.JPG"
           alt="Kerupuk kipas khas Besuki yang dijemur di bawah sinar matahari"
           fill
           priority
