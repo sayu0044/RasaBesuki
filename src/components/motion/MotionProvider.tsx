@@ -74,46 +74,70 @@ export function MotionProvider() {
 
     let batal = false;
     let bersihkan: (() => void) | null = null;
+    let rafId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
     loadMotionLibs().then(({ gsap, ScrollTrigger }) => {
       if (batal) return;
 
-      const ctx = gsap.context(() => {
-        const target = gsap.utils.toArray<HTMLElement>("[data-reveal]");
-        if (target.length === 0) return;
+      // Halaman panjang di-hydrate Next dalam beberapa segmen, dan segmen di
+      // bawah lipatan bisa saja belum selesai di-hydrate saat promise di atas
+      // beres. gsap.set menulis style langsung ke DOM lewat querySelectorAll,
+      // bukan lewat React, jadi kalau itu terjadi sebelum React sempat
+      // menghidrasi elemen tersebut, React menganggapnya mismatch begitu ia
+      // sampai ke sana.
+      //
+      // Satu requestAnimationFrame saja ternyata tidak cukup: di mode dev,
+      // overhead React DevTools dan Fast Refresh bisa membuat hydration
+      // memakan waktu lebih dari satu frame. Menunggu satu frame lalu satu
+      // macrotask (setTimeout) memberi jeda ganda, cukup untuk memastikan
+      // hydration benar-benar selesai sebelum GSAP menyentuh DOM. Elemen
+      // tetap tersembunyi lewat CSS bawaan sampai saat itu, jadi jeda
+      // beberapa milidetik ini tidak terlihat oleh pengguna.
+      rafId = requestAnimationFrame(() => {
+        timeoutId = setTimeout(() => {
+          if (batal) return;
 
-        // GSAP yang menyembunyikan, sesaat sebelum ia juga yang memunculkan.
-        gsap.set(target, { opacity: 0, y: 8 });
+          const ctx = gsap.context(() => {
+            const target = gsap.utils.toArray<HTMLElement>("[data-reveal]");
+            if (target.length === 0) return;
 
-        target.forEach((el) => {
-          gsap.to(el, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: el,
-              // 88% membuat elemen selesai muncul saat benar-benar dibaca.
-              start: "top 88%",
-              once: true,
-            },
+            // GSAP yang menyembunyikan, sesaat sebelum ia juga yang memunculkan.
+            gsap.set(target, { opacity: 0, y: 8 });
+
+            target.forEach((el) => {
+              gsap.to(el, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: el,
+                  // 88% membuat elemen selesai muncul saat benar-benar dibaca.
+                  start: "top 88%",
+                  once: true,
+                },
+              });
+            });
           });
-        });
+
+          // Tinggi halaman baru berbeda dari halaman sebelumnya, jadi posisi
+          // trigger yang lama sudah tidak berlaku.
+          ScrollTrigger.refresh();
+
+          bersihkan = () => {
+            // revert() menghapus gaya inline yang dipasang GSAP, sehingga elemen
+            // kembali ke keadaan terlihat, bukan tertinggal transparan.
+            ctx.revert();
+          };
+        }, 0);
       });
-
-      // Tinggi halaman baru berbeda dari halaman sebelumnya, jadi posisi
-      // trigger yang lama sudah tidak berlaku.
-      ScrollTrigger.refresh();
-
-      bersihkan = () => {
-        // revert() menghapus gaya inline yang dipasang GSAP, sehingga elemen
-        // kembali ke keadaan terlihat, bukan tertinggal transparan.
-        ctx.revert();
-      };
     });
 
     return () => {
       batal = true;
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      if (timeoutId !== null) clearTimeout(timeoutId);
       bersihkan?.();
     };
   }, [pathname]);
