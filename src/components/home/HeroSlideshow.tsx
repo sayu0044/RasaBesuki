@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-const DETIK_PER_FOTO = 6;
-const DETIK_TRANSISI = 1.5;
+const DETIK_PER_FOTO = 5;
+const DETIK_TRANSISI = 1.0;
 
 /**
  * Crossfade murni CSS: tiap foto punya jendela tampil yang sama panjang,

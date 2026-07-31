@@ -2,10 +2,10 @@ import Link from "next/link";
 import { sentra } from "@/lib/produsen";
 
 const TAUTAN = [
-  { href: "/tentang", label: "Tentang Sentra" },
-  { href: "/produsen", label: "Produsen" },
-  { href: "/proses", label: "Proses Produksi" },
-  { href: "/kontak", label: "Hubungi Kami" },
+  { href: "/tentang", label: "Tentang Kami" },
+  { href: "/proses", label: "Produksi" },
+  { href: "/produsen", label: "UMKM" },
+  { href: "/kontak", label: "Kontak" },
 ];
 
 export function Footer() {

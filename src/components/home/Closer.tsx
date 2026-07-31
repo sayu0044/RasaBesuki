@@ -12,7 +12,7 @@ export function Closer() {
     <section className="relative overflow-hidden bg-laut-950">
       <div className="absolute inset-0">
         <Image
-          src="/img/about-5.jpg"
+          src="/img/hero/krupuk9.jpg"
           alt=""
           aria-hidden
           fill
@@ -33,7 +33,7 @@ export function Closer() {
           pertanyaan seputar kerja sama dan dokumentasi sentra.
         </p>
         <div data-reveal className="mt-8 flex justify-center">
-          <TombolTautan href="/kontak" ragam="kertas">
+          <TombolTautan href="081358287685" ragam="kertas">
             Hubungi Kami
           </TombolTautan>
         </div>
