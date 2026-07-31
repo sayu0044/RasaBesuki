@@ -97,7 +97,7 @@
   }
 
   /*
-    Batang gulir: satu batang bata tipis, tanpa apa pun yang lain.
+    Batang gulir: satu batang abu tipis, tanpa apa pun yang lain.
 
     Bawaan Windows memberi batang abu-abu tebal lengkap dengan tombol panah
     di kedua ujungnya. Di halaman yang seluruh garisnya hairline, batang itu
@@ -119,14 +119,22 @@
   @supports not selector(::-webkit-scrollbar) {
     html {
       scrollbar-width: thin;
-      scrollbar-color: var(--color-bata) transparent;
+      scrollbar-color: var(--color-teks-samar) transparent;
     }
   }
 
-  /* Chromium dan Safari, tempat setiap bagian batang bisa diatur sendiri. */
+  /*
+    Chromium dan Safari, tempat setiap bagian batang bisa diatur sendiri.
+
+    5px diambil dari situs yang dirujuk. Perlu dicatat, situs itu sendiri
+    tidak menampilkan batang gulir apa pun; angka 5px di sana milik panel
+    dalamnya, bukan halamannya. Yang disalin ke sini hanya ukurannya, karena
+    situs ini memang ingin batangnya tetap terlihat sebagai petunjuk posisi
+    baca.
+  */
   html::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 5px;
+    height: 5px;
   }
 
   /* Lajur dibiarkan tembus pandang supaya tidak ada kolom abu-abu di tepi. */
@@ -139,15 +147,19 @@
     untuk menipiskan thumb dari dalam, tapi di layar itu terbaca sebagai
     bingkai putih mengelilingi batang. Menipiskan batangnya langsung lewat
     width lebih jujur dan tidak meninggalkan garis apa pun.
+
+    Abu-abu diambil dari teks-samar, bukan dari abu-abu netral mana pun.
+    Palet situs ini condong ke teal, dan abu-abu murni akan terbaca kotor
+    di sebelah kertas yang dingin.
   */
   html::-webkit-scrollbar-thumb {
-    background-color: var(--color-bata);
+    background-color: var(--color-teks-samar);
     border: none;
     border-radius: 999px;
   }
 
   html::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-bata-gelap);
+    background-color: var(--color-tinta);
   }
 
   /*
