@@ -196,46 +196,6 @@
       "catatan_produksi": null,
       "foto_utama": "img/logo (2).png",
       "foto_galeri": []
-    },
-    {
-      "id": "rumah-produksi-09",
-      "terverifikasi": false,
-      "nama_usaha": "Rumah Produksi 09",
-      "nama_pemilik": null,
-      "tahun_mulai": null,
-      "desa": null,
-      "kecamatan": "Besuki",
-      "alamat": null,
-      "maps_url": null,
-      "whatsapp": null,
-      "deskripsi": null,
-      "produk": [],
-      "melayani_eceran": null,
-      "melayani_grosir": null,
-      "melayani_reseller": null,
-      "catatan_produksi": null,
-      "foto_utama": "img/logo (2).png",
-      "foto_galeri": []
-    },
-    {
-      "id": "rumah-produksi-10",
-      "terverifikasi": false,
-      "nama_usaha": "Rumah Produksi 10",
-      "nama_pemilik": null,
-      "tahun_mulai": null,
-      "desa": null,
-      "kecamatan": "Besuki",
-      "alamat": null,
-      "maps_url": null,
-      "whatsapp": null,
-      "deskripsi": null,
-      "produk": [],
-      "melayani_eceran": null,
-      "melayani_grosir": null,
-      "melayani_reseller": null,
-      "catatan_produksi": null,
-      "foto_utama": "img/logo (2).png",
-      "foto_galeri": []
     }
   ]
 }

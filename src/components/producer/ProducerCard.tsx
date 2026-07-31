@@ -50,22 +50,18 @@ export function ProducerCard({ produsen }: { produsen: Produsen }) {
 
         <p className="text-sm text-teks-samar">{lokasiSingkat(produsen)}</p>
 
-        <div className="flex flex-wrap gap-1.5">
-          {adaData ? (
-            label.map((teks) => (
+        {adaData && (
+          <div className="flex flex-wrap gap-1.5">
+            {label.map((teks) => (
               <span
                 key={teks}
                 className="rounded-chip bg-bata-lembut px-2.5 py-1 text-xs font-medium text-bata-gelap"
               >
                 {teks}
               </span>
-            ))
-          ) : (
-            <span className="rounded-chip border border-dashed border-garis-tegas px-2.5 py-1 text-xs font-medium text-teks-samar">
-              Detail menyusul
-            </span>
-          )}
-        </div>
+            ))}
+          </div>
+        )}
 
         <div className="mt-auto pt-4">
           <Link
