@@ -1,6 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import {
+  CalendarBlank,
+  CheckCircle,
+  MapPin,
+  NotePencil,
+  Storefront,
+  Tag,
+  User,
+  WhatsappLogo,
+} from "@phosphor-icons/react/ssr";
 import { Masthead } from "@/components/layout/Masthead";
 import { TombolTautan } from "@/components/ui/Button";
 import {
@@ -8,6 +18,7 @@ import {
   getAllProdusen,
   getProdusenById,
   isFilled,
+  jenisProduk,
   layananPembelian,
   lokasiSingkat,
 } from "@/lib/produsen";
@@ -36,9 +47,13 @@ export async function generateMetadata(
  * Profil satu rumah produksi.
  *
  * Setiap field yang belum dikonfirmasi pemilik usaha ditampilkan sebagai
- * "Belum tersedia". Tombol WhatsApp dan Google Maps hanya muncul bila
- * datanya benar-benar ada, karena tombol yang mengarah ke nomor kosong lebih
- * buruk daripada tidak ada tombol sama sekali.
+ * "Belum tersedia". Tombol WhatsApp hanya muncul bila nomornya benar-benar
+ * ada, karena tombol yang mengarah ke nomor kosong lebih buruk daripada
+ * tidak ada tombol sama sekali.
+ *
+ * Tautan Google Maps sengaja tidak lagi ditampilkan sebagai tombol terpisah
+ * di sini: satu-satunya ajakan bertindak pada halaman ini adalah menghubungi
+ * produsen lewat WhatsApp.
  */
 export default async function ProfilProdusenPage(
   props: PageProps<"/produsen/[id]">,
@@ -50,16 +65,28 @@ export default async function ProfilProdusenPage(
   const foto = fotoUtama(produsen);
   const wa = waProdusen(produsen);
   const layanan = layananPembelian(produsen);
+  const jenis = jenisProduk(produsen);
 
-  const informasi: Array<{ kunci: string; nilai: string | null }> = [
-    { kunci: "Nama usaha", nilai: produsen.nama_usaha },
-    { kunci: "Pemilik", nilai: produsen.nama_pemilik },
-    { kunci: "Lokasi", nilai: produsen.alamat ?? produsen.desa },
+  const informasi: Array<{
+    ikon: typeof User;
+    label: string;
+    nilai: string | null;
+  }> = [
+    { ikon: User, label: "Pemilik", nilai: produsen.nama_pemilik },
     {
-      kunci: "Sistem pembelian",
+      ikon: CalendarBlank,
+      label: "Mulai produksi",
+      nilai: isFilled(produsen.tahun_mulai)
+        ? String(produsen.tahun_mulai)
+        : null,
+    },
+    { ikon: MapPin, label: "Alamat", nilai: produsen.alamat ?? produsen.desa },
+    {
+      ikon: Storefront,
+      label: "Sistem pembelian",
       nilai: layanan.length > 0 ? layanan.join(", ") : null,
     },
-    { kunci: "Produksi", nilai: produsen.catatan_produksi },
+    { ikon: NotePencil, label: "Catatan produksi", nilai: produsen.catatan_produksi },
   ];
 
   return (
@@ -67,15 +94,32 @@ export default async function ProfilProdusenPage(
       <Masthead />
 
       <div className="wrap pt-32 pb-14 lg:pt-40">
-        <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-14">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-kartu bg-kertas-tenggelam">
+        <div className="flex items-center gap-2 text-teks-samar">
+          <MapPin size={18} weight="fill" className="shrink-0 text-bata" />
+          <span className="text-sm">{lokasiSingkat(produsen)}</span>
+        </div>
+
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <h1 className="display text-[2rem] text-tinta sm:text-[2.75rem]">
+            {produsen.nama_usaha}
+          </h1>
+          {produsen.terverifikasi && (
+            <span className="inline-flex items-center gap-1.5 rounded-chip bg-bata-lembut px-2.5 py-1 text-xs font-medium text-bata-gelap">
+              <CheckCircle size={14} weight="fill" />
+              Terverifikasi
+            </span>
+          )}
+        </div>
+
+        <div className="mt-10 grid gap-8 lg:grid-cols-[3fr_2fr] lg:gap-10">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-kartu bg-kertas-tenggelam lg:aspect-auto">
             {foto ? (
               <Image
                 src={foto}
                 alt={`Dokumentasi ${produsen.nama_usaha}`}
                 fill
                 priority
-                sizes="(min-width: 1024px) 50vw, 100vw"
+                sizes="(min-width: 1024px) 55vw, 100vw"
                 className="object-cover"
               />
             ) : (
@@ -85,33 +129,42 @@ export default async function ProfilProdusenPage(
             )}
           </div>
 
-          <div>
-            <h1 className="display text-[2rem] text-tinta sm:text-[2.75rem]">
-              {produsen.nama_usaha}
-            </h1>
-            <p className="mt-3 text-teks-samar">{lokasiSingkat(produsen)}</p>
-
-            <p className="mt-6 max-w-[52ch]">
+          <div className="flex flex-col">
+            <p className="max-w-[52ch]">
               {isFilled(produsen.deskripsi)
                 ? produsen.deskripsi
                 : "Cerita usaha ini belum tersedia. Keterangannya akan ditambahkan setelah wawancara dengan pemilik selesai."}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            {jenis.length > 0 && (
+              <div className="mt-6">
+                <p className="flex items-center gap-1.5 text-sm text-teks-samar">
+                  <Tag size={16} />
+                  Produk yang dihasilkan
+                </p>
+                <div className="mt-2.5 flex flex-wrap gap-1.5">
+                  {jenis.map((teks) => (
+                    <span
+                      key={teks}
+                      className="rounded-chip bg-bata-lembut px-2.5 py-1 text-xs font-medium text-bata-gelap"
+                    >
+                      {teks}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="mt-auto pt-8">
               {wa ? (
-                <TombolTautan href={wa} ragam="utama">
+                <TombolTautan href={wa} ragam="utama" penuh>
+                  <WhatsappLogo size={20} weight="fill" />
                   Hubungi Produsen
                 </TombolTautan>
               ) : (
-                <p className="rounded-tombol border border-dashed border-garis-tegas px-5 py-3 text-sm text-teks-samar">
+                <p className="rounded-tombol border border-dashed border-garis-tegas px-5 py-3 text-center text-sm text-teks-samar">
                   Nomor WhatsApp belum tersedia
                 </p>
-              )}
-
-              {isFilled(produsen.maps_url) && (
-                <TombolTautan href={produsen.maps_url as string} ragam="garis">
-                  Kunjungi Rumah Produksi
-                </TombolTautan>
               )}
             </div>
           </div>
@@ -121,19 +174,26 @@ export default async function ProfilProdusenPage(
       <section className="wrap border-t border-garis py-14 md:py-20">
         <h2 className="display text-[1.75rem] text-tinta">Informasi Usaha</h2>
 
-        <dl className="mt-8 grid gap-6 sm:grid-cols-2">
+        <dl className="mt-8 grid gap-x-6 gap-y-7 sm:grid-cols-2">
           {informasi.map((baris) => (
-            <div key={baris.kunci}>
-              <dt className="text-sm text-teks-samar">{baris.kunci}</dt>
-              <dd
-                className={`mt-1 text-[1.0625rem] ${
-                  isFilled(baris.nilai)
-                    ? "font-medium text-tinta"
-                    : "text-teks-samar"
-                }`}
-              >
-                {isFilled(baris.nilai) ? baris.nilai : "Belum tersedia"}
-              </dd>
+            <div key={baris.label} className="flex gap-3">
+              <baris.ikon
+                size={20}
+                weight="regular"
+                className="mt-0.5 shrink-0 text-teks-samar"
+              />
+              <div>
+                <dt className="text-sm text-teks-samar">{baris.label}</dt>
+                <dd
+                  className={`mt-1 text-[1.0625rem] ${
+                    isFilled(baris.nilai)
+                      ? "font-medium text-tinta"
+                      : "text-teks-samar"
+                  }`}
+                >
+                  {isFilled(baris.nilai) ? baris.nilai : "Belum tersedia"}
+                </dd>
+              </div>
             </div>
           ))}
         </dl>
