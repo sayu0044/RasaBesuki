@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+// Entry ssr, bukan entry utama. Halaman ini Server Component, sementara entry
+// utama @phosphor-icons/react ditandai "use client" dan akan menyeret seluruh
+// halaman ke sisi klien hanya demi ikon-ikon ini.
 import {
   CalendarBlank,
   CheckCircle,
@@ -10,8 +13,10 @@ import {
   Tag,
   User,
   WhatsappLogo,
-} from "@phosphor-icons/react/ssr";
+} from "@phosphor-icons/react/dist/ssr";
 import { Masthead } from "@/components/layout/Masthead";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { jsonLdProdusen } from "@/lib/jsonld";
 import { TombolTautan } from "@/components/ui/Button";
 import {
   fotoUtama,
@@ -91,6 +96,13 @@ export default async function ProfilProdusenPage(
 
   return (
     <>
+      {/*
+        Diletakkan di halaman detail, bukan di daftar, karena hanya di sinilah
+        seluruh yang dinyatakan JSON-LD benar-benar terlihat pengunjung: nama
+        usaha, alamat, foto, dan nomor WhatsApp di tombol.
+      */}
+      <JsonLd data={jsonLdProdusen(produsen)} />
+
       <Masthead />
 
       <div className="wrap pt-32 pb-14 lg:pt-40">
@@ -158,7 +170,14 @@ export default async function ProfilProdusenPage(
             <div className="mt-auto pt-8">
               {wa ? (
                 <TombolTautan href={wa} ragam="utama" penuh>
-                  <WhatsappLogo size={20} weight="fill" />
+                  {/*
+                    Ikon dibiarkan mengikuti warna teks tombol, tidak diberi
+                    hijau WhatsApp. Di atas tombol laut-950 hijau itu akan
+                    bertabrakan dengan satu-satunya aksen situs ini, dan yang
+                    perlu dikenali pengguna adalah bentuk logonya, bukan
+                    warnanya. Jarak ke teks sudah ditangani gap-2 milik tombol.
+                  */}
+                  <WhatsappLogo size={20} weight="fill" aria-hidden />
                   Hubungi Produsen
                 </TombolTautan>
               ) : (

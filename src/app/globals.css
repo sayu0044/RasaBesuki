@@ -95,42 +95,101 @@
     background: var(--color-bata);
     color: #fff;
   }
+
+  /*
+    Batang gulir: satu batang abu tipis, tanpa apa pun yang lain.
+
+    Bawaan Windows memberi batang abu-abu tebal lengkap dengan tombol panah
+    di kedua ujungnya. Di halaman yang seluruh garisnya hairline, batang itu
+    menjadi elemen paling tebal di layar sekaligus satu-satunya bagian yang
+    warnanya datang dari sistem operasi, bukan dari tema situs.
+
+    Dua jalur di bawah sengaja dipisah, dan pemisahannya bukan gaya-gayaan.
+    Chromium sejak versi 121 mengenal scrollbar-width dan scrollbar-color,
+    dan begitu salah satunya diset, ia MENGABAIKAN seluruh aturan
+    ::-webkit-scrollbar. Padahal hanya lewat ::-webkit-scrollbar tombol panah
+    bisa dimatikan dan border thumb bisa dihapus; scrollbar-color tidak punya
+    kendali atas keduanya. Menulis keduanya untuk peramban yang sama berarti
+    yang menang justru jalur yang paling sedikit bisa diatur.
+
+    Karena itu properti standar dibatasi pada peramban yang memang tidak
+    punya ::-webkit-scrollbar, yaitu Firefox. Firefox tidak mengenal selektor
+    itu sehingga selector() bernilai salah di sana dan benar di Chromium.
+  */
+  @supports not selector(::-webkit-scrollbar) {
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-teks-samar) transparent;
+    }
+  }
+
+  /*
+    Chromium dan Safari, tempat setiap bagian batang bisa diatur sendiri.
+
+    5px diambil dari situs yang dirujuk. Perlu dicatat, situs itu sendiri
+    tidak menampilkan batang gulir apa pun; angka 5px di sana milik panel
+    dalamnya, bukan halamannya. Yang disalin ke sini hanya ukurannya, karena
+    situs ini memang ingin batangnya tetap terlihat sebagai petunjuk posisi
+    baca.
+  */
+  html::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Lajur dibiarkan tembus pandang supaya tidak ada kolom abu-abu di tepi. */
+  html::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /*
+    Tanpa border sama sekali. Versi sebelumnya memakai border sewarna kertas
+    untuk menipiskan thumb dari dalam, tapi di layar itu terbaca sebagai
+    bingkai putih mengelilingi batang. Menipiskan batangnya langsung lewat
+    width lebih jujur dan tidak meninggalkan garis apa pun.
+
+    Abu-abu diambil dari teks-samar, bukan dari abu-abu netral mana pun.
+    Palet situs ini condong ke teal, dan abu-abu murni akan terbaca kotor
+    di sebelah kertas yang dingin.
+  */
+  html::-webkit-scrollbar-thumb {
+    background-color: var(--color-teks-samar);
+    border: none;
+    border-radius: 999px;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-tinta);
+  }
+
+  /*
+    Tombol panah di kedua ujung dimatikan. Keduanya perlu disebut: tanpa
+    display none Chromium tetap menyediakan ruang untuknya, dan tanpa ukuran
+    nol sebagian versi masih menggambar kotak kosong di sana.
+  */
+  html::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* Sudut pertemuan batang tegak dan mendatar, agar tidak muncul kotak abu. */
+  html::-webkit-scrollbar-corner {
+    background: transparent;
+  }
 }
 
 /*
-  Transisi masuk antar halaman.
+  Sengaja TIDAK ada animasi masuk halaman di berkas ini.
 
-  Hanya opacity yang dianimasikan. Menganimasikan transform akan membuat
-  pembungkusnya menjadi containing block bagi masthead yang position: fixed,
-  dan masthead akan melompat setiap kali transisi berjalan.
+  Versi sebelumnya memutar fade pada pembungkus halaman setiap kali rute
+  berganti, di atas penanda tunggu bawaan App Router dan di atas reveal
+  per-bagian milik GSAP. Tiga gerakan berbeda untuk satu klik. Sekarang
+  pergantian rute dimiliki satu pihak saja, yaitu tirai di PageTransition,
+  dan pergantiannya terjadi di balik tirai itu.
 */
-@keyframes page-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
 @layer utilities {
-  /*
-    Tanpa animation-fill-mode, dan itu disengaja.
-
-    Dengan fill "both", keadaan awal keyframe ikut dipertahankan selama animasi
-    belum berjalan. Artinya halaman menahan opacity 0 setiap kali animasinya
-    tidak jadi berjalan, misalnya di tab latar belakang yang dibekukan atau di
-    peramban yang animasinya dimatikan. Itu persis pola yang membuat konten
-    hilang pada bug sebelumnya.
-
-    Tanpa fill-mode, keadaan di luar masa animasi adalah opacity normal, yaitu
-    terlihat. Animasi yang tidak berjalan berarti kehilangan transisi, bukan
-    kehilangan halaman.
-  */
-  .animate-page-in {
-    animation: page-in 0.35s var(--ease-keluar);
-  }
-
   /*
     Judul display. Instrument Serif hanya punya satu berat, jadi hierarki
     dibangun lewat ukuran dan warna, bukan font-weight.
