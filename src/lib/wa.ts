@@ -58,6 +58,14 @@ export function waProdusen(p: Produsen): string | null {
   return waLink(p.whatsapp);
 }
 
-export function waAdminSentra(): string | null {
-  return waLink(sentra.whatsapp_admin);
+/**
+ * Nomor pengelola sentra, bukan nomor rumah produksi.
+ *
+ * Menerima pesan sendiri karena yang menghubungi lewat jalur ini punya
+ * keperluan yang berbeda: mendaftarkan usaha atau menanyakan kerja sama,
+ * bukan memesan kerupuk. Memakai pesan bawaan di sini akan membuat pemilik
+ * usaha yang ingin bergabung memperkenalkan diri seolah-olah hendak membeli.
+ */
+export function waAdminSentra(pesan?: string): string | null {
+  return waLink(sentra.whatsapp_admin, pesan);
 }
