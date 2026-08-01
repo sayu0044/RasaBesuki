@@ -49,7 +49,7 @@ export function Hero() {
             Jelajahi Produsen
           </TombolTautan>
           <TombolTautan href="/tentang" ragam="terang">
-            Tentang Sentra
+            Tentang Kami
           </TombolTautan>
         </div>
       </div>

@@ -17,7 +17,6 @@ import {
 import { Masthead } from "@/components/layout/Masthead";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { jsonLdProdusen } from "@/lib/jsonld";
-import { embedMapsSrc } from "@/lib/maps";
 import { TombolTautan } from "@/components/ui/Button";
 import {
   fotoUtama,
@@ -27,7 +26,6 @@ import {
   jenisProduk,
   layananPembelian,
   lokasiSingkat,
-  sentra,
 } from "@/lib/produsen";
 import { waProdusen } from "@/lib/wa";
 
@@ -108,18 +106,6 @@ export default async function ProfilProdusenPage(
       <Masthead />
 
       <div className="wrap pt-32 pb-14 lg:pt-40">
-        {isFilled(produsen.maps_url) && (
-          <div className="mb-8 h-[260px] w-full overflow-hidden rounded-kartu border border-garis bg-kertas-tenggelam sm:h-[340px] lg:h-[420px]">
-            <iframe
-              src={embedMapsSrc()}
-              title={`Peta kawasan produksi ${sentra.nama}`}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="h-full w-full border-0"
-            />
-          </div>
-        )}
-
         <div className="flex items-center gap-2 text-teks-samar">
           <MapPin size={18} weight="fill" className="shrink-0 text-bata" />
           <span className="text-sm">{lokasiSingkat(produsen)}</span>
