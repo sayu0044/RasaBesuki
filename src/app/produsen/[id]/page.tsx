@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 // halaman ke sisi klien hanya demi satu ikon.
 import { WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
 import { Masthead } from "@/components/layout/Masthead";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { jsonLdProdusen } from "@/lib/jsonld";
 import { TombolTautan } from "@/components/ui/Button";
 import {
   fotoUtama,
@@ -68,6 +70,13 @@ export default async function ProfilProdusenPage(
 
   return (
     <>
+      {/*
+        Diletakkan di halaman detail, bukan di daftar, karena hanya di sinilah
+        seluruh yang dinyatakan JSON-LD benar-benar terlihat pengunjung: nama
+        usaha, alamat, foto, dan nomor WhatsApp di tombol.
+      */}
+      <JsonLd data={jsonLdProdusen(produsen)} />
+
       <Masthead />
 
       <div className="wrap pt-32 pb-14 lg:pt-40">

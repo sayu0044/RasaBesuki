@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Masthead } from "@/components/layout/Masthead";
 import { ProducerCard } from "@/components/producer/ProducerCard";
 import { ProdusenHero } from "@/components/producer/ProdusenHero";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { jsonLdDirektori } from "@/lib/jsonld";
 import { getAllProdusen } from "@/lib/produsen";
 
 export const metadata: Metadata = {
@@ -24,6 +26,13 @@ export default function ProdusenPage() {
 
   return (
     <>
+      {/*
+        Menyatakan halaman ini sebagai daftar usaha, bukan artikel yang
+        kebetulan menyebut banyak nama. Tiap butir hanya menunjuk ke halaman
+        detailnya; datanya sendiri tetap tinggal di sana.
+      */}
+      <JsonLd data={jsonLdDirektori(produsen)} />
+
       <Masthead diAtasHero />
       {/*
         Penanda tak terlihat setinggi banner. Masthead mengamatinya lewat

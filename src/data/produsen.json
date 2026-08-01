@@ -25,7 +25,7 @@
   "sentra": {
     "nama": "Sentra Kerupuk Kipas Besuki",
     "tagline": "Cerita rasa dari rumah-rumah produksi Besuki.",
-    "base_url": null,
+    "base_url": "https://kerupukbesuki.vercel.app",
     "kecamatan": "Besuki",
     "kabupaten": "Situbondo",
     "provinsi": "Jawa Timur",
