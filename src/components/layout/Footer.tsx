@@ -5,7 +5,11 @@ const TAUTAN = [
   { href: "/tentang", label: "Tentang Kami" },
   { href: "/proses", label: "Produksi" },
   { href: "/produsen", label: "UMKM" },
-  { href: "/kontak", label: "Kontak" },
+  // Halaman kontak dinonaktifkan. Kodenya masih ada di src/app/_kontak,
+  // dikeluarkan dari routing lewat awalan garis bawah. Entri ini dibiarkan
+  // sebagai komentar supaya urutan tautan tidak perlu disusun ulang saat
+  // halamannya dihidupkan lagi.
+  // { href: "/kontak", label: "Kontak" },
 ];
 
 export function Footer() {

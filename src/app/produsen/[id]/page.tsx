@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+// Entry ssr, bukan entry utama. Halaman ini Server Component, sementara entry
+// utama @phosphor-icons/react ditandai "use client" dan akan menyeret seluruh
+// halaman ke sisi klien hanya demi satu ikon.
+import { WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
 import { Masthead } from "@/components/layout/Masthead";
 import { TombolTautan } from "@/components/ui/Button";
 import {
@@ -100,6 +104,14 @@ export default async function ProfilProdusenPage(
             <div className="mt-8 flex flex-wrap gap-3">
               {wa ? (
                 <TombolTautan href={wa} ragam="utama">
+                  {/*
+                    Ikon dibiarkan mengikuti warna teks tombol, tidak diberi
+                    hijau WhatsApp. Di atas tombol laut-950 hijau itu akan
+                    bertabrakan dengan satu-satunya aksen situs ini, dan yang
+                    perlu dikenali pengguna adalah bentuk logonya, bukan
+                    warnanya. Jarak ke teks sudah ditangani gap-2 milik tombol.
+                  */}
+                  <WhatsappLogo size={20} weight="fill" aria-hidden />
                   Hubungi Produsen
                 </TombolTautan>
               ) : (
